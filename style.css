@@ -10,7 +10,7 @@ body {
     color: #fff;
 }
 
-/* LAYOUT */
+/* ===== LAYOUT ===== */
 .layout {
     display: flex;
     max-width: 1200px;
@@ -21,11 +21,12 @@ body {
     overflow: hidden;
 }
 
-/* SIDEBAR */
+/* ===== SIDEBAR ===== */
 .sidebar {
     width: 320px;
     background: linear-gradient(180deg, #1a1a1a, #0f0f0f);
     padding: 30px 20px;
+    flex-shrink: 0;
 }
 
 .sidebar h1 {
@@ -62,7 +63,7 @@ body {
     padding-bottom: 5px;
 }
 
-/* MAIN */
+/* ===== MAIN ===== */
 .main {
     flex: 1;
     padding: 40px;
@@ -77,7 +78,7 @@ body {
     margin-bottom: 15px;
 }
 
-/* CARDS */
+/* ===== CARDS ===== */
 .card {
     background: rgba(255,255,255,0.05);
     padding: 20px;
@@ -86,7 +87,7 @@ body {
     margin-bottom: 15px;
 }
 
-/* SKILLS */
+/* ===== SKILLS ===== */
 .skills {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -100,18 +101,80 @@ body {
     text-align: center;
 }
 
-/* LIST */
+/* ===== LIST ===== */
 .card ul {
     padding-left: 20px;
 }
 
-/* MOBILE */
+/* =========================
+   📱 ADAPTIVE (TABLET)
+   ========================= */
 @media (max-width: 900px) {
     .layout {
         flex-direction: column;
+        margin: 20px;
     }
 
     .sidebar {
         width: 100%;
+        padding: 30px;
+    }
+
+    .main {
+        padding: 30px;
+    }
+}
+
+/* =========================
+   📱 MOBILE
+   ========================= */
+@media (max-width: 600px) {
+    .layout {
+        margin: 15px;
+        border-radius: 16px;
+    }
+
+    .avatar {
+        width: 120px;
+        height: 120px;
+    }
+
+    .sidebar h1 {
+        font-size: 20px;
+    }
+
+    .job-title {
+        font-size: 13px;
+    }
+
+    .main {
+        padding: 20px;
+    }
+
+    .main h2 {
+        font-size: 22px;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .skills {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 10px;
+    }
+
+    .skill {
+        padding: 12px;
+        font-size: 14px;
+    }
+}
+
+/* =========================
+   🖥️ LARGE SCREENS
+   ========================= */
+@media (min-width: 1400px) {
+    .layout {
+        max-width: 1400px;
     }
 }
