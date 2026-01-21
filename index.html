@@ -1,106 +1,403 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Serhii Andriushenko | Resume</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andriushenko Serhii - MD3 Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <style>
+        /* --- MD3 DESIGN TOKENS (Dark Mode) --- */
+        :root {
+            /* Colors */
+            --md-sys-color-background: #111318;
+            --md-sys-color-on-background: #E2E2E9;
+            
+            /* Tonal Elevation */
+            --md-sys-color-surface-container-low: #191C20;
+            --md-sys-color-surface-container: #1D2024;
+            --md-sys-color-surface-container-high: #282A2F;
+
+            /* Accents */
+            --md-sys-color-primary: #D0BCFF;
+            --md-sys-color-on-primary: #381E72;
+            --md-sys-color-primary-container: #4F378B;
+            --md-sys-color-on-primary-container: #EADDFF;
+            
+            --md-sys-color-secondary-container: #4A4458;
+            --md-sys-color-on-secondary-container: #E8DEF8;
+
+            --md-sys-color-outline: #938F99;
+            --md-sys-color-outline-variant: #49454F;
+
+            /* State Layers */
+            --md-sys-state-hover-opacity: 0.08;
+
+            /* Typography */
+            --md-ref-typeface: 'Roboto', sans-serif;
+            
+            /* Shapes */
+            --md-sys-shape-corner-large: 16px;
+            --md-sys-shape-corner-extra-large: 28px;
+            --md-sys-shape-corner-full: 9999px;
+
+            /* Motion */
+            --md-sys-motion-duration-short: 200ms;
+            --md-sys-motion-easing-standard: cubic-bezier(0.2, 0.0, 0, 1.0);
+        }
+
+        /* --- GLOBAL RESET --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            background-color: var(--md-sys-color-background);
+            color: var(--md-sys-color-on-background);
+            font-family: var(--md-ref-typeface);
+            display: flex;
+            justify-content: center;
+            padding: 24px;
+            min-height: 100vh;
+        }
+
+        /* --- LAYOUT GRID --- */
+        .container {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 24px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+        }
+
+        /* --- BASE COMPONENTS --- */
+        .card {
+            background-color: var(--md-sys-color-surface-container);
+            border-radius: var(--md-sys-shape-corner-extra-large);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: 0px 1px 2px rgba(0,0,0,0.3), 0px 1px 3px 1px rgba(0,0,0,0.15);
+        }
+
+        .display-name {
+            font-size: 28px;
+            line-height: 36px;
+            font-weight: 400;
+            color: var(--md-sys-color-on-background);
+        }
+        .display-role {
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: 0.25px;
+            color: var(--md-sys-color-outline);
+            margin-bottom: 24px;
+        }
+        .headline-section {
+            font-size: 22px;
+            line-height: 28px;
+            font-weight: 400;
+            color: var(--md-sys-color-primary);
+        }
+        .label-small {
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+            text-transform: uppercase;
+            color: var(--md-sys-color-primary);
+            margin-top: 16px;
+            margin-bottom: 8px;
+        }
+        .body-text {
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: 0.25px;
+            color: var(--md-sys-color-on-background);
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            background-color: var(--md-sys-color-surface-container-low);
+            align-items: center;
+            text-align: center;
+            height: fit-content;
+        }
+
+        .avatar-box {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 16px;
+        }
+        
+        .avatar {
+            width: 100%;
+            height: 100%;
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            border-radius: var(--md-sys-shape-corner-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            overflow: hidden;
+        }
+
+        .contact-group, .lang-group {
+            width: 100%;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        /* Links style update */
+        a.list-item {
+            text-decoration: none; /* Убираем подчеркивание ссылок */
+            color: inherit;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 8px 12px;
+            border-radius: var(--md-sys-shape-corner-large);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        /* Div list item (for non-clickable) */
+        div.list-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 8px 12px;
+            border-radius: var(--md-sys-shape-corner-large);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .list-item:hover { background-color: rgba(255,255,255, 0.05); }
+
+        .icon-slot {
+            color: var(--md-sys-color-outline);
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .text-slot {
+            display: flex;
+            flex-direction: column;
+        }
+        .text-slot span:first-child { font-size: 12px; color: var(--md-sys-color-outline); }
+        .text-slot span:last-child { font-size: 14px; color: var(--md-sys-color-on-background); }
+
+        /* --- MAIN CONTENT --- */
+        .main-col { display: flex; flex-direction: column; gap: 24px; }
+
+        .edu-block {
+            padding-left: 16px;
+            border-left: 2px solid var(--md-sys-color-outline-variant);
+            margin-bottom: 16px;
+        }
+        .school-name { font-size: 16px; font-weight: 500; color: var(--md-sys-color-on-background); }
+        .school-meta { font-size: 14px; color: var(--md-sys-color-outline); margin-top: 4px; }
+
+        .chips-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .md-chip {
+            position: relative;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 16px;
+            border-radius: 8px;
+            background-color: var(--md-sys-color-surface-container-high);
+            color: var(--md-sys-color-on-background);
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid var(--md-sys-color-outline-variant);
+            cursor: pointer;
+            overflow: hidden;
+            transition: all var(--md-sys-motion-duration-short);
+        }
+        .md-chip:hover { border-color: var(--md-sys-color-outline); }
+        .md-chip:active { transform: scale(0.98); }
+
+        /* RIPPLE ANIMATION */
+        span.ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple 600ms linear;
+            background-color: rgba(255, 255, 255, 0.3);
+            pointer-events: none;
+        }
+        @keyframes ripple { to { transform: scale(4); opacity: 0; } }
+
+        .qualities-list { list-style: none; }
+        .qualities-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--md-sys-color-on-background);
+        }
+        .qualities-list li::before {
+            content: "•";
+            position: absolute;
+            left: 8px;
+            color: var(--md-sys-color-primary);
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 
-<div class="layout">
+<div class="container">
+    
+    <aside class="card sidebar">
+        <div class="avatar-box">
+            <div class="avatar">
+               <span class="material-symbols-outlined" style="font-size: 64px;">person</span>
+            </div>
+        </div>
+        
+        <h1 class="display-name">Andriushenko Serhii</h1>
+        <p class="display-role">Junior Frontend / Backend Developer</p>
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-        <img src="myphoto.jpg" alt="My photo" class="avatar">
+        <div class="contact-group">
+            <div class="label-small">Контакти</div>
+            
+            <a href="mailto:06serega098@gmail.com" class="list-item md-ripple">
+                <span class="material-symbols-outlined icon-slot">mail</span>
+                <div class="text-slot">
+                    <span>Email</span>
+                    <span>06serega098@gmail.com</span>
+                </div>
+            </a>
 
-        <h1>Andriushenko Serhii</h1>
-        <p class="job-title">Junior Frontend / Backend Developer</p>
+            <a href="https://t.me/SerhiiMavordi" target="_blank" class="list-item md-ripple">
+                <span class="material-symbols-outlined icon-slot">send</span>
+                <div class="text-slot">
+                    <span>Telegram</span>
+                    <span>@SerhiiMayordi</span>
+                </div>
+            </a>
 
-        <div class="sidebar-block">
-            <h3>Contacts</h3>
-            <p>Email: 06serega0698@gmail.com</p>
-            <p>Telegram: @SerhiiMavrodi</p>
-            <p>Phone: +380502988115</p>
+            <a href="tel:+380502988115" class="list-item md-ripple">
+                <span class="material-symbols-outlined icon-slot">call</span>
+                <div class="text-slot">
+                    <span>Phone</span>
+                    <span>+380502988115</span>
+                </div>
+            </a>
         </div>
 
-        <div class="sidebar-block">
-            <h3>Languages</h3>
-            <p>Ukrainian — Native</p>
-            <p>Russian — Fluent</p>
-            <p>English — Intermediate</p>
+        <div class="lang-group">
+            <div class="label-small">Мови</div>
+            <div class="list-item"> <div class="text-slot">
+                    <span>Native</span>
+                    <span>Ukrainian</span>
+                </div>
+            </div>
+            <div class="list-item">
+                <div class="text-slot">
+                    <span>Intermediate</span>
+                    <span>English</span>
+                </div>
+            </div>
         </div>
     </aside>
 
-    <!-- MAIN CONTENT -->
-    <main class="main">
+    <main class="main-col">
+        <article class="card">
+            <h2 class="headline-section">Профіль</h2>
+            <p class="body-text">
+                Я мотивований та відповідальний студент Херсонського державного університету з глибоким інтересом до розробки програмного забезпечення. Зосереджуюся на створенні зручних та надійних вебзастосунків, постійно вдосконалюючи frontend i backend навички.
+            </p>
+        </article>
 
-        <section>
-            <h2>Profile</h2>
-            <div class="card">
-                <p>
-                    I am a motivated and responsible student at Kherson State University with a strong
-                    technical background and a deep interest in software development. I focus on
-                    building reliable and user-friendly web applications, constantly improving my
-                    skills in both frontend and backend development. I am highly adaptable, quick to
-                    learn new technologies, and motivated to grow as a professional developer.
-                </p>
+        <article class="card">
+            <h2 class="headline-section">Освіта</h2>
+            <div class="edu-block">
+                <div class="school-name">Kherson State University</div>
+                <div class="school-meta">Бакалавр (у процесі навчання)<br>Computer Science / IT</div>
             </div>
-        </section>
-
-        <section>
-            <h2>Education</h2>
-            <div class="card">
-                <p><strong>Kherson State University</strong></p>
-                <p>Bachelor’s degree (in progress)</p>
-                <p>Computer Science / Information Technologies</p>
+            <div class="edu-block">
+                <div class="school-name">Physics and Technology Lyceum</div>
+                <div class="school-meta">Середня спеціалізована освіта</div>
             </div>
+        </article>
 
-            <div class="card">
-                <p><strong>Physics and Technology Lyceum</strong></p>
-                <p>Specialized secondary education</p>
+        <article class="card">
+            <h2 class="headline-section">Технічні навички</h2>
+            <div class="chips-grid">
+                <button class="md-chip md-ripple">HTML / CSS</button>
+                <button class="md-chip md-ripple">JavaScript (ES6+)</button>
+                <button class="md-chip md-ripple">SQL</button>
+                <button class="md-chip md-ripple">C++</button>
+                <button class="md-chip md-ripple">C#</button>
+                <button class="md-chip md-ripple">Responsive Design</button>
+                <button class="md-chip md-ripple">Basic Backend</button>
+                <button class="md-chip md-ripple">Git</button>
             </div>
-        </section>
+        </article>
 
-        <section>
-            <h2>Technical Skills</h2>
-            <div class="skills">
-                <div class="skill">HTML5 / CSS3</div>
-                <div class="skill">JavaScript (ES6+)</div>
-                <div class="skill">C++</div>
-                <div class="skill">C#</div>
-                <div class="skill">SQL</div>
-                <div class="skill">Basic Backend Logic</div>
-                <div class="skill">Responsive Design</div>
-                <div class="skill">Git (basic)</div>
-            </div>
-        </section>
+        <article class="card">
+            <h2 class="headline-section">Особисті якості</h2>
+            <ul class="qualities-list">
+                <li>Аналітичне мислення</li>
+                <li>Відповідальність і самодисципліна</li>
+                <li>Швидке навчання</li>
+                <li>Командна робота</li>
+                <li>Уважність до деталей</li>
+            </ul>
+        </article>
 
-        <section>
-            <h2>Personal Qualities</h2>
-            <div class="card">
-                <ul>
-                    <li>Analytical thinking</li>
-                    <li>Responsibility and self-discipline</li>
-                    <li>Fast learner</li>
-                    <li>Teamwork and communication skills</li>
-                    <li>Attention to detail</li>
-                </ul>
-            </div>
-        </section>
-
-        <section>
-            <h2>Interests</h2>
-            <div class="card">
-                <p>
-                    Web technologies, software development, UI/UX design, cybersecurity basics,
-                    esports, and continuous self-development.
-                </p>
-            </div>
-        </section>
-
+        <article class="card">
+            <h2 class="headline-section">Інтереси</h2>
+            <p class="body-text">Вебтехнології, розробка ПЗ, UI/UX дизайн, кібербезпека, кіберспорт, саморозвиток.</p>
+        </article>
     </main>
-
 </div>
 
+<script>
+    function createRipple(event) {
+        // Проверяем, на что кликнули. Если на иконку внутри ссылки - берем родителя (ссылку)
+        const element = event.currentTarget;
+
+        const circle = document.createElement("span");
+        const diameter = Math.max(element.clientWidth, element.clientHeight);
+        const radius = diameter / 2;
+
+        circle.style.width = circle.style.height = `${diameter}px`;
+        circle.style.left = `${event.clientX - element.getBoundingClientRect().left - radius}px`;
+        circle.style.top = `${event.clientY - element.getBoundingClientRect().top - radius}px`;
+        circle.classList.add("ripple");
+
+        const existingRipple = element.getElementsByClassName("ripple")[0];
+        if (existingRipple) existingRipple.remove();
+
+        element.appendChild(circle);
+    }
+
+    // Добавляем эффект волны ко всем элементам с классом md-ripple
+    const rippleElements = document.getElementsByClassName("md-ripple");
+    for (const el of rippleElements) {
+        el.addEventListener("click", createRipple);
+    }
+</script>
+
 </body>
-</ht
+</html>
