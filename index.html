@@ -140,14 +140,20 @@
         .avatar {
             width: 100%;
             height: 100%;
+            /* Кольори фону більше не потрібні, якщо фото завантажиться, але залишаться як запасний варіант */
             background-color: var(--md-sys-color-primary-container);
-            color: var(--md-sys-color-on-primary-container);
             border-radius: var(--md-sys-shape-corner-full);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 48px;
-            overflow: hidden;
+            overflow: hidden; /* Обрізає все, що виходить за коло */
+        }
+
+        /* НОВИЙ CSS ДЛЯ ФОТО */
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Гарантує, що фото заповнить коло без спотворень (обріжеться за потреби) */
         }
 
         .contact-group, .lang-group {
@@ -269,7 +275,7 @@
     <aside class="card sidebar">
         <div class="avatar-box">
             <div class="avatar">
-               <span class="material-symbols-outlined" style="font-size: 64px;">person</span>
+                <img src="myphoto.jpg" alt="Фото Андрющенко Сергій">
             </div>
         </div>
         
@@ -306,7 +312,8 @@
 
         <div class="lang-group">
             <div class="label-small">Мови</div>
-            <div class="list-item"> <div class="text-slot">
+            <div class="list-item">
+                <div class="text-slot">
                     <span>Native</span>
                     <span>Ukrainian</span>
                 </div>
